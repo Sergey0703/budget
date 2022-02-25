@@ -1,77 +1,40 @@
-import {Component} from "react";
-import Balance from '../Balance';
-//import Transaction from '../Transaction';
-import Transactions from '../Transactions';
-import Form from '../Form';
+import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom";
+import Home from "../Home/index.js";
+import About from "../About/index.js";
+import Statistics from "../Statistics/index.js";
 
-let id=0;
-class App extends Component {
-    constructor(){
-       super();
-       this.state ={
-           balance:0,
-           transactions:[]
-       }
-       this.onIncrease=this.onIncrease.bind(this);
-      // this.onDecrease=this.onDecrease.bind(this);
-      console.log('constructor');
-    }
-   
-    onIncrease() {
-      this.setState((state)=>({
-          balance:this.state.balance+1,
-          transactions: [{
-           label: 'incr',
-           value: 1,
-           id: ++id
-          }, ...this.state.transactions]
-          }))
-      } ;
+
+const App =()=> {
     
-
-    onDecrease=()=>{
-        this.setState((state)=>({
-            balance:this.state.balance-1,
-            transactions: [{
-             label: 'decr',
-             value: 1,
-             id: ++id
-            }, ...this.state.transactions]
-            }))
-    }
-
-    componentDidMount(){
-        
-    }
-
-    componentWillUnmount(){
-        // console.log('componentWillUnmount');
-        // window.localStorage.setItem('balance',JSON.stringify(this.state.balance));
-    }
-
-    // shouldComponentUpdate(){
-    //     console.log('shouldComponentUpdate');
-    //     console.log(this.state);
-    //     debugger
-    //     return false;
-    // }
-
-    render(){
-        console.log('render');
         return (
-         <div>
-          <Form/>   
-          <button onClick={this.onDecrease}>-</button>   
-         <Balance balance={this.state.balance}>Bal</Balance>
-         <button onClick={this.onIncrease}>+</button>
-         <hr/>
-         
-         <Transactions transactions={this.state.transactions}/>
-        
-         </div>
-        )
+         <Router>   
+         <>
+         <nav>
+           <ul>
+               <li> 
+                   <Link to="/">Home</Link>    
+               </li>
+               <li>
+                   <Link to="/about">About</Link>
+               </li>
+               <li>
+                   <Link to="/statistics">Statistics</Link>
+               </li>
+           </ul>
 
-        }
+         </nav>
+         <Routes>
+<Route path="/about" element={<About/>}/>
+
+<Route path="/statistics" element={<Statistics/>}/>
+
+<Route path="/" element={<Home/>}/>
+
+         </Routes>
+        
+         </>
+         </Router>
+        )
 
 }
 

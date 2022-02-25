@@ -1,10 +1,13 @@
-const Transaction=(props)=>{
+//import './style.css';
+import {Wrapper} from './styles.js';
+
+const Transaction=({transaction})=>{
     return(
-    <div >
-    label: {props.transaction.label}
-    value: {props.transaction.value}
+    <Wrapper value={transaction.value}>
+    label: {transaction.label}
+    value: {transaction.value}
     <br/>
-    </div>
+    </Wrapper>
     )
 }
 
